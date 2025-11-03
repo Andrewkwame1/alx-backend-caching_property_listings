@@ -24,6 +24,8 @@ services:
     container_name: property_redis
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -48,3 +50,4 @@ services:
 
 volumes:
   postgres_data_v2:
+  redis_data:

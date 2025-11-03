@@ -8,7 +8,7 @@ class PropertiesConfig(AppConfig):
     def ready(self):
         # Import signal handlers to ensure they are registered
         try:
-            from . import signals  # noqa: F401
+            import properties.signals  # noqa: F401
         except Exception:
             # Avoid raising on import errors during some management commands
             pass
