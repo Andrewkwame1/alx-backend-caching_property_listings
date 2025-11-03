@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtualenv
+.env
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Byte-compiled, C extensions
+*.so
+
+# IDEs
+.vscode/
+.idea/
+.quodo/
+*.sublime-project
+*.sublime-workspace
+
+# macOS/Windows
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+.env
+*.env
+
+# Logs
+*.log
+
+# Coverage
+.coverage
+htmlcov/
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# pytest
+.pytest_cache/
+.cache/
+
+# mypy
+.mypy_cache/
+
+# celery
+celerybeat-schedule
+
+# JetBrains
+*.iml

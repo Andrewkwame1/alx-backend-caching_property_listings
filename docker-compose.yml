@@ -1,0 +1,50 @@
+services:
+  # PostgreSQL Database - This is where all property data is permanently stored
+  postgres:
+    image: postgres:latest
+    container_name: property_postgres
+    environment:
+      POSTGRES_DB: property_db
+      POSTGRES_USER: property_user
+      POSTGRES_PASSWORD: property_pass
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_v2:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U property_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache - This is our "memory" for fast data retrieval
+  redis:
+    image: redis:latest
+    container_name: property_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Django application running inside the compose network
+  web:
+    build: .
+    container_name: property_web
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=alx_backend_caching_property_listings.settings
+
+volumes:
+  postgres_data_v2:
