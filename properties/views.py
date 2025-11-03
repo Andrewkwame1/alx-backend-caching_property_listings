@@ -22,4 +22,5 @@ def property_list(request):
 		for p in properties
 	]
 
-	return JsonResponse(data, safe=False)
+	# Wrap the list in an object for a consistent JSON response shape
+	return JsonResponse({'properties': data})
